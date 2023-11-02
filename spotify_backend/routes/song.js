@@ -34,8 +34,8 @@ router.get("/get/mysongs", passport.authenticate("jwt", {session: false}), async
 }); 
 //---------------------------------------------------------------------------------------------
 // get route to get all songs any artist has published
-router.get("/get/artist", passport.authenticate("jwt", {session: false}), async (req, res) => {
-    const {artistId} = req.body;
+router.get("/get/artist/:artistId", passport.authenticate("jwt", {session: false}), async (req, res) => {
+    const {artistId} = req.params;
     // we can check if artistId is valid or not
     const artist = await User.find({_id: artistId});
     if(!artist){
@@ -52,9 +52,9 @@ router.get("/get/artist", passport.authenticate("jwt", {session: false}), async 
 
 //---------------------------------------------------------------------------------------------
 // get route to get all songs by name
-router.get("/get/name", passport.authenticate("jwt", {session: false}), async (req, res) => {
-    const {songName} = req.body;
-    const songs = await song.find({songName});
+router.get("/get/songname/:songName", passport.authenticate("jwt", {session: false}), async (req, res) => {
+    const {songName} = req.params;
+    const songs = await song.find({name: songName});
     return res
                 .status(200)
                 .json(songs);

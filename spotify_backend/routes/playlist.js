@@ -10,15 +10,14 @@ const router = express.Router();
 router.post("/create", passport.authenticate("jwt", {session: false}), async (req, res) => {
     const currentUser = req.user; 
     const {name, thumbnail, songs} = req.body;
-    const playlistData = {name, thumbnail, songs, owner:currentUser._id, collaborators:[]};
-    const playlist = await playlist.create(playlistData);
-
+    
     if(!name || !thumbnail || !songs){
         return res
                     .status(301)
                     .json({error: "Insufficient details to create playlist"});
     }
 
+    const playlistData = {name, thumbnail, songs, owner:currentUser._id, collaborators:[]}; 
     const user = req.user._id;
     const createdPlaylist = await playlist.create(playlistData);
     return res
@@ -72,7 +71,7 @@ router.post("/add/song", passport.authenticate("jwt", {session: false}), async (
     const {playlistId, songId} = req.body;
 
     //Step 0: Get the playlist if valid or not
-    const playlist = await playlist.findOne({_id: playlistId});
+    const playlists = await playlist.findOne({_id: playlistId});
     if(!playlist){
         return res
                     .status(304)
