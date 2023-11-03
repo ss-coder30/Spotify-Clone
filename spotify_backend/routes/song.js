@@ -37,7 +37,8 @@ router.get("/get/mysongs", passport.authenticate("jwt", {session: false}), async
 router.get("/get/artist/:artistId", passport.authenticate("jwt", {session: false}), async (req, res) => {
     const {artistId} = req.params;
     // we can check if artistId is valid or not
-    const artist = await User.find({_id: artistId});
+    const artist = await User.findOne({_id: artistId});
+    console.log(artist);
     if(!artist){
         return res
                     .status(301)

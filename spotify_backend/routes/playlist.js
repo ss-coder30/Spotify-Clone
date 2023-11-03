@@ -79,14 +79,14 @@ router.post("/add/song", passport.authenticate("jwt", {session: false}), async (
     }
 
     //Step 1: Check if current user is owner/collaborator of playlist or not
-    if(playlist.owner != currentUser._id || !playlist.collaborators.includes(currentUser._id)){
+    if(!playlists.owner.equals(currentUser._id) && !playlists.collaborators.includes(currentUser._id)){
         return res
                     .status(400)
                     .json({error: "You are not authorized to add songs to this playlist"});
     }
 
     //Step 2: Check if songId is valid or not
-    const song = await song.findOne({_id: songId});
+    const Song = await song.findOne({_id: songId});
     if(!song){
         return res
                     .status(304)
@@ -95,11 +95,11 @@ router.post("/add/song", passport.authenticate("jwt", {session: false}), async (
 
     //Step 3: Add song to playlist
 
-    playlist.songs.push(songId);
-    await playlist.save();
+    playlists.songs.push(songId);
+    await playlists.save();
     return res
                 .status(200)
-                .json(playlist);
+                .json(playlists);
 });
 
 
