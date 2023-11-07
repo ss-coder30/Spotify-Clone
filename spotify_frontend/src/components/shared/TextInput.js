@@ -1,6 +1,6 @@
 const TextInput = ({label, placeholder}) => {
     return (
-        <div className="textInputDiv flex flex-col space-y-2">
+        <div className="textInputDiv flex flex-col space-y-2 my-4">
             <label for={label} className="font-semibold">
                 {label}
             </label>
