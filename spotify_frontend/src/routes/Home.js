@@ -2,6 +2,13 @@ import { Icon } from '@iconify/react';
 import IconText from "../components/shared/IconText"
 import TextWithHover from '../components/shared/TextWithHover';
 
+const focusCardsData = [{title: "Peaceful Piano", description: "Relax and indulge with beautiful piano pieces", imgUrl: "https://s3-eu-central-1.amazonaws.com/websites-production/unicaf/wp-content/uploads/2015/10/Her-Campus-Studying-Main-_0.jpg"}, 
+                        {title: "Deep Focus", description:"Keep calm and focus with this music", imgUrl: "https://th.bing.com/th/id/OIP.g9Jwe_5ocfeJFUpfSiRm9QHaD4?w=1200&h=630&rs=1&pid=ImgDetMain"}, 
+                        {title: "Instrumental Study", description:"Focus with soft study music in the background", imgUrl: "https://s3-eu-central-1.amazonaws.com/websites-production/unicaf/wp-content/uploads/2015/10/Her-Campus-Studying-Main-_0.jpg"}, 
+                        {title: "Focus Flow", description:"Uptempo instrumental hip hop beats", imgUrl: "https://s3-eu-central-1.amazonaws.com/websites-production/unicaf/wp-content/uploads/2015/10/Her-Campus-Studying-Main-_0.jpg"}, 
+                        {title: "Beats to think to", description:"Focus with deep techno and tech music", imgUrl: "https://s3-eu-central-1.amazonaws.com/websites-production/unicaf/wp-content/uploads/2015/10/Her-Campus-Studying-Main-_0.jpg"}
+                    ];
+
 const HomeComponent = () => {
     return (
         <div className="h-full w-full flex">
@@ -55,9 +62,9 @@ const HomeComponent = () => {
             {/*this is for content region */}
 
                 <div className="content w-full h-9/10 bg-app-bg p-8 overflow-auto">
-                    <PlaylistView titleText="Focus" cardData=""/>
-                    <PlaylistView titleText="Spotify Playlists" cardData=""/>
-                    <PlaylistView titleText="Sound of India" cardData=""/>
+                    <PlaylistView titleText="Focus" cardData={focusCardsData}/>
+                    <PlaylistView titleText="Spotify Playlists" cardData={focusCardsData}/>
+                    <PlaylistView titleText="Sound of India" cardData={focusCardsData}/>
 
                 </div>
             </div>
@@ -77,28 +84,6 @@ const PlaylistView = ({titleText, cardData}) => {
                     return <Card title={card.title} description={card.description} imgUrl={card.imgUrl}/>
                 })
             }
-
-                <Card title="Peaceful Piano" 
-                        description="Relax and indulge with beautiful piano pieces" 
-                        imgUrl="https://s3-eu-central-1.amazonaws.com/websites-production/unicaf/wp-content/uploads/2015/10/Her-Campus-Studying-Main-_0.jpg"
-                />
-                <Card title="Deep Focus" 
-                        description="Keep calm and focus with this music" 
-                        imgUrl="https://th.bing.com/th/id/OIP.g9Jwe_5ocfeJFUpfSiRm9QHaD4?w=1200&h=630&rs=1&pid=ImgDetMain"
-                />
-                <Card title="Instrumental Study" 
-                        description="Focus with soft study music in the background" 
-                        imgUrl="https://s3-eu-central-1.amazonaws.com/websites-production/unicaf/wp-content/uploads/2015/10/Her-Campus-Studying-Main-_0.jpg"
-                />
-                <Card title="Focus Flow" 
-                        description="Uptempo instrumental hip hop beats" 
-                        imgUrl="https://s3-eu-central-1.amazonaws.com/websites-production/unicaf/wp-content/uploads/2015/10/Her-Campus-Studying-Main-_0.jpg"
-                />
-                <Card title="Beats to think to" 
-                        description="Focus with deep techno and tech music" 
-                        imgUrl="https://s3-eu-central-1.amazonaws.com/websites-production/unicaf/wp-content/uploads/2015/10/Her-Campus-Studying-Main-_0.jpg"
-                />
-
             </div>
         </div>
     )
