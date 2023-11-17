@@ -2,8 +2,37 @@ import { Icon } from '@iconify/react';
 import TextInput from '../components/shared/TextInput';
 import PasswordInput from '../components/shared/PasswordInput';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { makeUnauthenticatedPOSTRequest } from '../utils/serverHelpers';
 
 const SignupComponent = () => {
+
+    const [email, setEmail] = useState("");
+    const [confirmEmail, setConfirmEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+
+    const signUp = async () => {
+
+        if(email !== confirmEmail) {
+            alert("Email and Confirm Email fields do not match. Please check again");
+            return;
+        }
+
+        const data = {email, password, username, firstName, lastName};
+        // console.log(data);
+        const response = await makeUnauthenticatedPOSTRequest("/auth/register", data);
+
+        if(response && !response.err){
+            alert("Successfully signed up!");
+        }
+        else{
+            alert("Error signing up. Please try again");
+        }
+    }
+
     return (
         <div className="w-full h-full flex flex-col items-center">
             <div className="logo p-6 border-b border-solid border-gray-300 w-full flex justify-center">
@@ -13,18 +42,26 @@ const SignupComponent = () => {
             <div className="inputRegion w-1/3 flex flex-col justify-center">
                 <div className="font-bold mb-6 mt-10 items-center flex flex-col text-2xl">Signup for free to start listening</div>
 
-                <TextInput label="Email address" placeholder="Email address" className="w-2/3 my-6"/>
+                <TextInput label="Email address" placeholder="Email address" className="w-2/3 my-6" value={email} setvalue={setEmail}/>
 
-                <TextInput label="Confirm Email address" placeholder="Enter your Email address again " className="w-2/3 my-5"/>
+                <TextInput label="Confirm Email address" placeholder="Enter your Email address again " className="w-2/3 my-5" value={confirmEmail} setvalue={setConfirmEmail}/>
 
-                <PasswordInput label="Create Password" placeholder="Create Password" className="mb-6"/>
+                <TextInput label="Username" placeholder="Enter your Username" className="w-2/3 my-5" value={username} setvalue={setUsername}/>
 
-                <TextInput label="What should we call you?" placeholder="Enter your Profile name " className="w-2/3 my-5"/>
+                <PasswordInput label="Create Password" placeholder="Create Password" className="mb-6" value={password} setvalue={setPassword}/>
 
+                <div className="w-full justify-between items-center flex space-x-8">
+                    <TextInput label="Enter your first name" placeholder="Enter your first name " className="w-2/3 my-5" value={firstName} setvalue={setFirstName}/>
+                    <TextInput label="Enter your last name" placeholder="Enter your last name " className="w-2/3 my-5" value={lastName} setvalue={setLastName}/>                   
+                </div>
             </div>
 
-            <div className="w-1/3 flex justify-center items-center my-8 ">
-                <button className="bg-spotify-green font-semibold py-3 px-10 rounded-full">SIGN UP</button>
+            <div className="w-1/3 flex justify-center items-center my-8">
+                <button className="bg-spotify-green font-semibold py-3 px-10 rounded-full"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            signUp();    
+                }}>SIGN UP</button>
             </div>
 
             <div className="w-1/3 border border-solid border-gray-300">

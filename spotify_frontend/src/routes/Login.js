@@ -17,7 +17,7 @@ const LoginComponent = () => {
                 <PasswordInput label="Password" placeholder="Password"/>
             </div>
 
-            <div className="w-1/3 flex justify-end items-center my-8 ">
+            <div className="w-1/3 flex justify-center items-center my-8 ">
                 <button className="bg-spotify-green font-semibold py-3 px-10 rounded-full">LOG IN</button>
             </div>
 

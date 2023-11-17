@@ -8,9 +8,12 @@ const User = require('./models/user');
 const authRoutes = require('./routes/auth')
 const songRoutes = require('./routes/song');
 const playlistRoutes = require('./routes/playlist');
+const cors = require('cors');
 
 const app = express();
 const port = 8080;
+
+app.use(cors());
 
 app.use(express.json());
 
