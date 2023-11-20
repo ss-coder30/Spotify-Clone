@@ -68,7 +68,7 @@ const SignupComponent = () => {
             </div>
 
             <div className="w-1/3 flex justify-center items-center my-8">
-                <button className="bg-spotify-green font-semibold py-3 px-10 rounded-full"
+                <button className="bg-spotify-green font-semibold py-3 px-10 rounded-full border-2"
                         onClick={(e) => {
                             e.preventDefault();
                             signUp();    
@@ -82,7 +82,7 @@ const SignupComponent = () => {
 
             <div className="flex flex-col justify-center">
                 <Link to="/Login">
-                    <button className="font-semibold py-3 px-10 rounded-full border border-solid border-gray-500 text-gray-500 font-bold mb-5">LOG IN INSTEAD</button>
+                    <button className="font-semibold py-3 px-10 rounded-full border border-solid border-gray-500 text-gray-500 mb-5">LOG IN INSTEAD</button>
                 </Link>
             </div>
         </div>

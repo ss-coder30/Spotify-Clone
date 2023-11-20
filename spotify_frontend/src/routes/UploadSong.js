@@ -2,8 +2,12 @@ import { Icon } from '@iconify/react';
 import IconText from "../components/shared/IconText"
 import TextWithHover from '../components/shared/TextWithHover';
 import TextInput from '../components/shared/TextInput';
+import CloudinaryUpload from '../components/shared/CloudinaryUpload';
+
 
 const UploadSong = () => {
+    console.log(window);
+    console.log(window.cloudinary);
     return (
         <div className="h-full w-full flex">
             {/*this is for left region */}
@@ -66,6 +70,9 @@ const UploadSong = () => {
                             <div className='w-1/3'>
                                 <TextInput label="Thumbnail" labelClassName={"text-white"} placeholder={"Enter your Song Thumbnail"}/>
                             </div>
+                        </div>
+                        <div>
+                            <CloudinaryUpload />
                         </div>
                    </div>
                 </div>
