@@ -28,6 +28,7 @@ export const makeAuthenticatedPOSTRequest = async (route, body) => {
         });
     const formattedResponse = await response.json();
     return formattedResponse;
+    
 }
 
 const getToken = () => {

@@ -16,6 +16,7 @@ const UploadSong = () => {
     const [uploadedSongFileName, setUploadedSongFileName] = useState();
     const navigate = useNavigate();
 
+    {/* submitting song function */}
     const submitSong = async () => {
         const data = {name, thumbnail, track: playlistUrl};
         const response = await makeAuthenticatedPOSTRequest("/song/create", data);
