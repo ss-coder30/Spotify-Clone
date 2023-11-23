@@ -15,7 +15,7 @@ const Song = new mongoose.Schema({
         },
         artist:{
             type: mongoose.Types.ObjectId, // getting data from another collection
-            ref: "user",
+            ref: "User",
         },
     }
 );

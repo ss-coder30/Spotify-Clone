@@ -27,13 +27,13 @@ router.post("/create", passport.authenticate("jwt", {session: false}), async (re
 // get route to song published
 router.get("/get/mysongs", passport.authenticate("jwt", {session: false}), async (req, res) => {    
     const artist = req.user._id;
-    const songs = await song.find({artist:req.user._id});
+    const songs = await song.find({artist:req.user._id}).populate("artist");
     return res
                 .status(200)
                 .json(songs);
 }); 
 //---------------------------------------------------------------------------------------------
-// get route to get all songs any artist has published
+// get route to get all songs any artist has published 
 router.get("/get/artist/:artistId", passport.authenticate("jwt", {session: false}), async (req, res) => {
     const {artistId} = req.params;
     // we can check if artistId is valid or not

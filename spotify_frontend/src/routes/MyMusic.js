@@ -2,8 +2,37 @@ import { Icon } from '@iconify/react';
 import IconText from "../components/shared/IconText"
 import TextWithHover from '../components/shared/TextWithHover';
 import SingleSongCard from '../components/shared/SingleSongCard';
+import { makeAuthenticatedGETRequest } from '../utils/serverHelpers';
+import { useState, useEffect } from 'react';
+import { Howl, Howler } from 'howler';
 
 const MyMusic = () => {
+
+    const [songData, setSongData] = useState([]);
+    const [soundPlayed, setSoundPlayed] = useState(null);
+
+    const playSound = (songSrc) => {
+        if(soundPlayed){
+            soundPlayed.stop();
+        }
+
+        let sound = new Howl({
+            src: [songSrc],
+            html5: true,
+        });
+        setSoundPlayed(sound);
+    
+        sound.play();
+    }
+
+    useEffect(() => {
+        const getData = async () => {
+            const response = await makeAuthenticatedGETRequest("/song/get/mysongs"
+            );
+            setSongData(response)
+        };
+        getData();
+    }, []);
 
     return (
         <div className="h-full w-full flex">
@@ -60,11 +89,9 @@ const MyMusic = () => {
                 <div className="content w-full h-9/10 bg-app-bg p-10 overflow-auto">
                    <div className='text-white text-xl font-semibold pb-4 pl-2'>My Songs</div>
                    <div className='space-y-3 overflow-auto'>
-                        <SingleSongCard />
-                        <SingleSongCard />
-                        <SingleSongCard />
-                        <SingleSongCard />
-                        <SingleSongCard />
+                        {songData.map((item) => {
+                            return <SingleSongCard info={item} playSound={playSound}/>
+                        })}
                    </div>
                 </div>
             </div>
