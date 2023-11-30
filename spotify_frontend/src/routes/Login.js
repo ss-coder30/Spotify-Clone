@@ -63,7 +63,7 @@ const LoginComponent = () => {
 
             <div className=" flex flex-col justify-center">
                 <Link to="/Signup">
-                    <button className="font-semibold py-3 px-10 rounded-full border border-solid border-gray-500 text-gray-500 font-bold">SIGN UP FOR SPOTIFY</button>
+                    <button className="font-semibold py-3 px-10 rounded-full border border-solid border-gray-500 text-gray-500">SIGN UP FOR SPOTIFY</button>
                 </Link>
             </div>
         </div>

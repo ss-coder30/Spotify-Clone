@@ -9,7 +9,7 @@ import LoggedInHomeComponent from './routes/LoggedInHome';
 import UploadSong from './routes/UploadSong';
 import MyMusic from './routes/MyMusic';
 import { useState } from 'react';
-import SongContext from './context/songContext';
+import songContext from './context/songContext';
 
 function App() {
 
@@ -22,22 +22,22 @@ function App() {
           {/* things inside this tag is rendered*/}
         {cookie.token ? (  
           // logged in routes
-        <Routes>
-          <SongContext.Provider value={{currentSong, setCurrentSong}}>
+        <songContext.Provider value={{currentSong, setCurrentSong}}>
+          <Routes>
             <Route path="/" element={<h1>Home</h1>} />
             <Route path="/home" element={<LoggedInHomeComponent />} />
             <Route path="/uploadSong" element={<UploadSong />}/>
             <Route path="/myMusic" element={<MyMusic />}/>
             <Route path="*" element={<Navigate to="/home"/>} />
-          </SongContext.Provider>
-        </Routes>
+          </Routes>
+        </songContext.Provider>
         ) : (
           // logged out routes
           <Routes>
             <Route path="/home" element={<HomeComponent />} />
             <Route path="/login" element={<LoginComponent />} />
             <Route path="/signup" element={<SignupComponent />} />
-          <Route path="*" element={<Navigate to="/login"/>} />
+            <Route path="*" element={<Navigate to="/login"/>} />
 
           </Routes>
         )}
