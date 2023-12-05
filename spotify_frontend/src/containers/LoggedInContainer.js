@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import IconText from "../components/shared/IconText"
 import TextWithHover from '../components/shared/TextWithHover';
-import { children, useState } from 'react';
+import { children, useEffect, useState } from 'react';
 import { Howl, Howler } from 'howler';
 import { useContext } from 'react';
 import songContext from '../context/songContext';
@@ -13,7 +13,22 @@ const LoggedInContainer = ({children}) => {
 
     const {currentSong, setCurrentSong} = useContext(songContext);
 
-    const playSound = (songSrc) => {
+    useEffect(() => {
+        if(!currentSong){
+            return;
+        }
+        changeSong(currentSong.track);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentSong]);
+
+    const playSound = () => {
+        if(!soundPlayed){
+            return;
+        }
+        soundPlayed.play();
+    };
+
+    const changeSong = (songSrc) => {
         if(soundPlayed){
             soundPlayed.stop();
         }
@@ -25,6 +40,7 @@ const LoggedInContainer = ({children}) => {
         setSoundPlayed(sound);
     
         sound.play();
+        setIsPaused(false);
     }
 
     const pauseSound = () => {
@@ -33,7 +49,7 @@ const LoggedInContainer = ({children}) => {
 
     const togglePlayPause = () => {
         if(isPaused){
-            playSound(currentSong.track);
+            playSound();
             setIsPaused(false);
         }
         else{
