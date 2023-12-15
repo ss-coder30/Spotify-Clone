@@ -17,7 +17,7 @@ const MyMusic = () => {
     }, []);
 
     return (
-        <LoggedInContainer>
+        <LoggedInContainer currentActiveScreen="myMusic">
             <div className="content w-full h-9/10 bg-app-bg p-10 ">
                 <div className='text-white text-xl font-semibold pb-4 pl-2'>My Songs</div>
                     <div className='space-y-3 overflow-auto'>

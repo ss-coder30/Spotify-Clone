@@ -1,25 +1,30 @@
 import { Icon } from '@iconify/react';
 import IconText from "../components/shared/IconText"
 import TextWithHover from '../components/shared/TextWithHover';
-import { children, useEffect, useState } from 'react';
+import { children, useLayoutEffect, useState, useRef } from 'react';
 import { Howl, Howler } from 'howler';
 import { useContext } from 'react';
 import songContext from '../context/songContext';
 
-const LoggedInContainer = ({children}) => {
+const LoggedInContainer = ({children, currentActiveScreen}) => {
 
-    const [soundPlayed, setSoundPlayed] = useState(null);
-    const [isPaused, setIsPaused] = useState(true);
+    const {currentSong, setCurrentSong, soundPlayed, setSoundPlayed, isPaused, setIsPaused} = useContext(songContext);
 
-    const {currentSong, setCurrentSong} = useContext(songContext);
+    const firstUpdate = useRef(true);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        // the following line is to stop the useEffect from re-rendering
+        if(firstUpdate.current){
+            firstUpdate.current = false;
+            return;
+        }
+
         if(!currentSong){
             return;
         }
         changeSong(currentSong.track);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentSong]);
+    }, [currentSong && currentSong.track]);
 
     const playSound = () => {
         if(!soundPlayed){
@@ -67,10 +72,10 @@ const LoggedInContainer = ({children}) => {
                     <div className="logoDiv my-5 ml-3 p-6">
                         <Icon icon="logos:spotify" width={125} /> 
 
-                        <IconText iconName={"material-symbols:home"} displayText={"Home"} active={"yes"}/>  
-                        <IconText iconName={"ion:search"} displayText={"Search"}/>  
-                        <IconText iconName={"fluent:library-32-regular"} displayText={"Library"}/> 
-                        <IconText iconName={"entypo:music"} displayText={"My Music"}/>  
+                        <IconText iconName={"material-symbols:home"} displayText={"Home"} active={currentActiveScreen === "home"} targetLink={"/home"}/>  
+                        <IconText iconName={"ion:search"} displayText={"Search"} active={currentActiveScreen === "search"}/>  
+                        <IconText iconName={"fluent:library-32-regular"} displayText={"Library"} active={currentActiveScreen === "library"}/> 
+                        <IconText iconName={"entypo:music"} displayText={"My Music"} targetLink={"/myMusic"} active={currentActiveScreen === "myMusic"}/>  
 
                     </div>
                     <div className='ml-5'>

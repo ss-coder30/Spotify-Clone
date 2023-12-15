@@ -15,6 +15,9 @@ function App() {
 
   const [cookie, setCookie] = useCookies(["token"]);
   const [currentSong, setCurrentSong] = useState(null);
+  const [soundPlayed, setSoundPlayed] = useState(null);
+  const [isPaused, setIsPaused] = useState(true);
+
 
   return (
     <div className="w-screen h-screen font-poppins ">
@@ -22,11 +25,11 @@ function App() {
           {/* things inside this tag is rendered*/}
         {cookie.token ? (  
           // logged in routes
-        <songContext.Provider value={{currentSong, setCurrentSong}}>
+        <songContext.Provider value={{currentSong, setCurrentSong, soundPlayed, setSoundPlayed, isPaused, setIsPaused}}>
           <Routes>
             <Route path="/" element={<h1>Home</h1>} />
             <Route path="/home" element={<LoggedInHomeComponent />} />
-            <Route path="/uploadSong" element={<UploadSong />}/>
+            <Route path="/uploadSong" element={<UploadSong />}/>] = useState(true)
             <Route path="/myMusic" element={<MyMusic />}/>
             <Route path="*" element={<Navigate to="/home"/>} />
           </Routes>

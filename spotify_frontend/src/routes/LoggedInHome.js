@@ -14,8 +14,8 @@ const focusCardsData = [{title: "Peaceful Piano", description: "Relax and indulg
 
 const home = () => {
     return (
-        <LoggedInContainer>
-            <div className="content w-full h-9/10 bg-app-bg p-8 overflow-auto">
+        <LoggedInContainer currentActiveScreen="home">
+            <div className="content w-full h-9/10 bg-app-bg p-8">
                 <PlaylistView titleText="Focus" cardData={focusCardsData}/>
                 <PlaylistView titleText="Spotify Playlists" cardData={focusCardsData}/>
                 <PlaylistView titleText="Sound of India" cardData={focusCardsData}/>
