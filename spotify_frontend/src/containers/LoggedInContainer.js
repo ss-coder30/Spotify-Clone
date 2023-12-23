@@ -73,7 +73,7 @@ const LoggedInContainer = ({children, currentActiveScreen}) => {
                         <Icon icon="logos:spotify" width={125} /> 
 
                         <IconText iconName={"material-symbols:home"} displayText={"Home"} active={currentActiveScreen === "home"} targetLink={"/home"}/>  
-                        <IconText iconName={"ion:search"} displayText={"Search"} active={currentActiveScreen === "search"}/>  
+                        <IconText iconName={"ion:search"} displayText={"Search"} active={currentActiveScreen === "search"} targetLink={"/search"}/>  
                         <IconText iconName={"fluent:library-32-regular"} displayText={"Library"} active={currentActiveScreen === "library"}/> 
                         <IconText iconName={"entypo:music"} displayText={"My Music"} targetLink={"/myMusic"} active={currentActiveScreen === "myMusic"}/>  
 
