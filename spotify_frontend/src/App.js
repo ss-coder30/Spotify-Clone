@@ -11,6 +11,7 @@ import MyMusic from './routes/MyMusic';
 import SearchPage from './routes/SearchPage';
 import { useState } from 'react';
 import songContext from './context/songContext';
+import Library from './routes/LIbrary';
 
 function App() {
 
@@ -32,7 +33,8 @@ function App() {
             <Route path="/home" element={<LoggedInHomeComponent />} />
             <Route path="/uploadSong" element={<UploadSong />}/> = useState(true)
             <Route path="/myMusic" element={<MyMusic />}/>
-			<Route path="/search" element={<SearchPage />} />
+			      <Route path="/search" element={<SearchPage />} />
+            <Route path="/library" element={<Library />} />
             <Route path="*" element={<Navigate to="/home"/>} />
           </Routes>
         </songContext.Provider>

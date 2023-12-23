@@ -46,6 +46,18 @@ router.get("/get/playlist/:playlistId", passport.authenticate("jwt", {session: f
 });
 //---------------------------------------------------------------------------------------------------------------------
 
+//Route 3: Get all playlists by me
+
+router.get("/get/me", passport.authenticate("jwt", {session: false}), async (req, res) => {
+    const artistId = req.user._id;
+    // we can check if artistId is valid or not
+    const playlists = await playlist.find({owner: artistId}).populate("owner");
+
+    return res
+                .status(200)
+                .json(playlists);
+});
+//---------------------------------------------------------------------------------------------------------------------
 //Route 3: Get all playlists by an artist
 
 router.get("/get/artist/:artistId", passport.authenticate("jwt", {session: false}), async (req, res) => {

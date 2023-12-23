@@ -1,12 +1,15 @@
-import { Icon } from '@iconify/react';
+import { Icon} from '@iconify/react';
 import IconText from "../components/shared/IconText"
 import TextWithHover from '../components/shared/TextWithHover';
 import { children, useLayoutEffect, useState, useRef } from 'react';
 import { Howl, Howler } from 'howler';
 import { useContext } from 'react';
 import songContext from '../context/songContext';
+import CreatePlaylistModal from '../modals/CreatePlaylistModal';
 
 const LoggedInContainer = ({children, currentActiveScreen}) => {
+
+    const [createPlaylistModalOpen, setCreatePlaylistModalOpen] = useState(false);
 
     const {currentSong, setCurrentSong, soundPlayed, setSoundPlayed, isPaused, setIsPaused} = useContext(songContext);
 
@@ -65,6 +68,7 @@ const LoggedInContainer = ({children, currentActiveScreen}) => {
 
     return (
         <div className="h-full w-full bg-app-bg">
+        {createPlaylistModalOpen && <CreatePlaylistModal closeModal = {() => {setCreatePlaylistModalOpen(false)}}/>}
             <div className={`${currentSong?"h-9/10":"h-full"} w-full flex`}>
                 {/*this is for left region */}
                 <div className="h-full w-1/5 bg-black flex flex-col justify-between">
@@ -74,12 +78,12 @@ const LoggedInContainer = ({children, currentActiveScreen}) => {
 
                         <IconText iconName={"material-symbols:home"} displayText={"Home"} active={currentActiveScreen === "home"} targetLink={"/home"}/>  
                         <IconText iconName={"ion:search"} displayText={"Search"} active={currentActiveScreen === "search"} targetLink={"/search"}/>  
-                        <IconText iconName={"fluent:library-32-regular"} displayText={"Library"} active={currentActiveScreen === "library"}/> 
+                        <IconText iconName={"fluent:library-32-regular"} displayText={"Library"} active={currentActiveScreen === "library"} targetLink={"/library"}/> 
                         <IconText iconName={"entypo:music"} displayText={"My Music"} targetLink={"/myMusic"} active={currentActiveScreen === "myMusic"}/>  
 
                     </div>
                     <div className='ml-5'>
-                        <IconText iconName={"ph:plus-fill"} displayText={"Create Playlist"}/>  
+                        <IconText iconName={"ph:plus-fill"} displayText={"Create Playlist"} onClick={() => {setCreatePlaylistModalOpen(true)}}/>  
                         <IconText iconName={"majesticons:heart"} displayText={"Liked Songs"}/>  
                     </div>
                 </div>
@@ -97,7 +101,7 @@ const LoggedInContainer = ({children, currentActiveScreen}) => {
 
             {/*this is for navbar region */}
 
-                <div className="navbar w-full h-1/10 bg-app-bg bg-opacity-95 flex items-center justify-end overflow-auto">
+                <div className="navbar w-full h-1/10 bg-black bg-opacity-40  flex items-center justify-end overflow-auto">
                     <div className="h-full w-1/2 flex">
                         <div className="w-2/3 flex justify-around items-center">
                             <TextWithHover displayText={"Premium"}/>
