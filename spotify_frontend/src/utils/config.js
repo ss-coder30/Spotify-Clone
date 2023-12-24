@@ -1,1 +1,1 @@
-export const backendUrl = "https://spotify-clone-nine-rust.vercel.app";
+export const backendUrl = process.env.REACT_APP_BACKEND_URI || "http://localhost:8080";
