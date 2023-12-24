@@ -37,7 +37,7 @@ const UploadSong = () => {
                                  <TextInput label="Name" labelClassName={"text-white font-sm"} placeholder={"Enter your Song Name"} value={name} setvalue={setName}/>
                              </div>
                              <div className='w-1/3 text-black'>
-                                 <TextInput label="Thumbnail" labelClassName={"text-white"} placeholder={"Enter your Song Thumbnail"} value={thumbnail} setvalue={setThumbnail}/>
+                                 <TextInput label="Thumbnail" labelClassName={"text-white"} placeholder={"Enter your Song Thumbnail (Image URL)"} value={thumbnail} setvalue={setThumbnail}/>
                              </div>
                          </div>
                          <div>

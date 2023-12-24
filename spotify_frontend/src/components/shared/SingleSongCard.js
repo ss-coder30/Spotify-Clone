@@ -21,9 +21,9 @@ const SingleSongCard = ({info, playSound}) => {
                         {info.artist.firstName + " " + info.artist.lastName}
                     </div>
                 </div>
-                <div className="w-1/6 flex justify-center items-center text-gray-400">
+                {/* <div className="w-1/6 flex justify-center items-center text-gray-400">
                     3:44
-                </div>
+                </div> */}
             </div>
         </div>
     )

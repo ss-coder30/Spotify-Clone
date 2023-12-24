@@ -116,7 +116,7 @@ const LoggedInContainer = ({children, currentActiveScreen}) => {
 
             {/*this is for navbar region */}
 
-                <div className="navbar w-full h-1/10 bg-black bg-opacity-40  flex items-center justify-end overflow-auto">
+                <div className="navbar w-full h-1/10 bg-black bg-opacity-40  flex items-center justify-end">
                     <div className="h-full w-1/2 flex">
                         <div className="w-2/3 flex justify-around items-center">
                             <TextWithHover displayText={"Premium"}/>
@@ -124,10 +124,10 @@ const LoggedInContainer = ({children, currentActiveScreen}) => {
                             <TextWithHover displayText={"Download"}/>
                             <div className="h-1/2 border-r border-white"></div>
                         </div>
-                        <div className="w-1/3 flex justify-around h-full items-center">
-                            <TextWithHover displayText={"Upload Song"}/>
-                            <div className="bg-white flex items-center justify-center h-10 w-10 px-2 rounded-full font-semibold cursor-pointer">
-                                SS
+                        <div className="w-1/3 flex justify-around h-full items-center text-sm overflow-none hover:text-white">
+                                <IconText iconName={"ic:round-upload"} displayText={"Upload "} targetLink={"/uploadSong"} active={currentActiveScreen === "myMusic"}/>  
+                            <div className=" flex items-center justify-center ">
+                                <IconText iconName={"iconamoon:profile-fill"} displayText={""} targetLink={"/home"} active={currentActiveScreen === "home"}/>  
                             </div>
                         </div>
                     </div>

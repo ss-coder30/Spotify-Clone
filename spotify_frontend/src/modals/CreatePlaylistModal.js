@@ -37,7 +37,7 @@ const CreatePlaylistModal = ({closeModal}) => {
                     <div className='w-full text-black'>
                         <TextInput label="Thumbnail" 
                                     labelClassName={"font-sm text-white"} 
-                                    placeholder={"Enter your Playlist Thumbnail"} 
+                                    placeholder={"Enter your Playlist Thumbnail (Image URL)"} 
                                     value={playlistThumbnail} 
                                     setvalue={setPlaylistThumbnail}
                         />
