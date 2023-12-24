@@ -12,6 +12,7 @@ import SearchPage from './routes/SearchPage';
 import { useState } from 'react';
 import songContext from './context/songContext';
 import Library from './routes/LIbrary';
+import SinglePlaylistView from './routes/SinglePlaylistView';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
             <Route path="/myMusic" element={<MyMusic />}/>
 			      <Route path="/search" element={<SearchPage />} />
             <Route path="/library" element={<Library />} />
+            <Route path="/playlist/:playlistId" element={<SinglePlaylistView />} />
             <Route path="*" element={<Navigate to="/home"/>} />
           </Routes>
         </songContext.Provider>

@@ -33,7 +33,7 @@ router.get("/get/playlist/:playlistId", passport.authenticate("jwt", {session: f
     const user = req.user._id;
     const playlistId = req.params.playlistId;
     //req.params : playlistId is a variable here 
-    const playlists = await playlist.findOne({_id: playlistId});
+    const playlists = await playlist.findOne({_id: playlistId}).populate({path: "songs", populate: {path: "artist"}});
     if(!playlists){
         return res
                     .status(301)

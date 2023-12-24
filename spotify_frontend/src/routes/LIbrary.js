@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import LoggedInContainer from "../containers/LoggedInContainer";
 import { makeAuthenticatedGETRequest } from "../utils/serverHelpers";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Library = () => {
 
@@ -28,6 +29,7 @@ const Library = () => {
                             title={item.name}
                             description=""
                             imgUrl={item.thumbnail}
+                            playlistId={item._id}
                         />
                     )
                 })}
@@ -36,9 +38,10 @@ const Library = () => {
     );
 }
 
-const Card = ({title, description, imgUrl}) => {
+const Card = ({title, description, imgUrl, playlistId}) => {
+    const navigate = useNavigate();
     return (
-        <div className="bg-black opacity-75 w-full p-4 mt-6 rounded-md">
+        <div className="bg-black opacity-75 w-full p-4 mt-6 rounded-md cursor-pointer" onClick={() => {navigate("/playlist/"+playlistId)}}>
             <div className='py-4'>
                 <img className="w-full rounded-md" src={imgUrl}/>
             </div>

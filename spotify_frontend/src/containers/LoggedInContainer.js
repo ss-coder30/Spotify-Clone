@@ -6,10 +6,13 @@ import { Howl, Howler } from 'howler';
 import { useContext } from 'react';
 import songContext from '../context/songContext';
 import CreatePlaylistModal from '../modals/CreatePlaylistModal';
+import AddToPlaylistModal from '../modals/AddToPlaylistModal';
+import { makeAuthenticatedPOSTRequest } from '../utils/serverHelpers';
 
 const LoggedInContainer = ({children, currentActiveScreen}) => {
 
     const [createPlaylistModalOpen, setCreatePlaylistModalOpen] = useState(false);
+    const [AddToPlaylistModalOpen, setAddToPlaylistModalOpen] = useState(false);
 
     const {currentSong, setCurrentSong, soundPlayed, setSoundPlayed, isPaused, setIsPaused} = useContext(songContext);
 
@@ -28,6 +31,15 @@ const LoggedInContainer = ({children, currentActiveScreen}) => {
         changeSong(currentSong.track);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentSong && currentSong.track]);
+
+    const addSongToPlaylist = async (playlistId) => {
+        const songId = currentSong._id;
+        const payload = {playlistId, songId};
+        const response = await makeAuthenticatedPOSTRequest("/playlist/add/song", payload);
+        if(response._id){
+            setAddToPlaylistModalOpen(false);
+        };
+    }
 
     const playSound = () => {
         if(!soundPlayed){
@@ -69,6 +81,9 @@ const LoggedInContainer = ({children, currentActiveScreen}) => {
     return (
         <div className="h-full w-full bg-app-bg">
         {createPlaylistModalOpen && <CreatePlaylistModal closeModal = {() => {setCreatePlaylistModalOpen(false)}}/>}
+        {AddToPlaylistModalOpen && <AddToPlaylistModal closeModal={() => {setAddToPlaylistModalOpen(false)}} 
+                                                        addSongToPlaylist={addSongToPlaylist}/>}
+
             <div className={`${currentSong?"h-9/10":"h-full"} w-full flex`}>
                 {/*this is for left region */}
                 <div className="h-full w-1/5 bg-black flex flex-col justify-between">
@@ -153,8 +168,9 @@ const LoggedInContainer = ({children, currentActiveScreen}) => {
                     </div>
                 </div>
 
-                <div className='w-1/4 flex justify-end'>
-                    Hello
+                <div className='w-1/4 flex justify-end cursor-pointer  space-x-2 pr-4'>
+                    <Icon icon="ic:round-playlist-add" fontSize={27} className=' text-gray-500 hover:text-white' onClick={() => {setAddToPlaylistModalOpen(true)}}/>
+                    <Icon icon="solar:heart-bold" fontSize={27} className=' text-gray-500 hover:text-white'/>
                 </div>
                 
             </div>
